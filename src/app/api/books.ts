@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+const API_KEY = 'AIzaSyBzZps92933e3h7y7BVbMnzpLPvRk-SEzM';
 const BASE_URL = 'https://www.googleapis.com/books/v1/volumes';
 
 export const fetchBooks = async (def: any, page: any, search: any) => {
@@ -10,6 +10,7 @@ export const fetchBooks = async (def: any, page: any, search: any) => {
                 q: search ? search : def,
                 startIndex: page,
                 maxResults: 20,
+                key: API_KEY,
             },
         });
         return response.data.items;

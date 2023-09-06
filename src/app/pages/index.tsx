@@ -40,7 +40,7 @@ const HomePage = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchTanggal, setSearchTanggal] = useState('');
     const [isGridView, setIsGridView] = useState(true);
-    const [isSortBy, setIsSortBy] = useState('title');
+    const [isSortBy, setIsSortBy] = useState('');
     const queryClient = useQueryClient();
 
     const queryKey = ['all', page, searchQuery];
@@ -69,7 +69,6 @@ const HomePage = () => {
 
     if (searchTanggal) {
         const YearFilter = moment(searchTanggal).format('YYYY');
-        console.log(YearFilter);
         dataFiltered = data.filter((item: any) => {
             if (item.volumeInfo && item.volumeInfo.publishedDate) {
                 return item.volumeInfo.publishedDate.includes(YearFilter);
@@ -77,26 +76,30 @@ const HomePage = () => {
         });
     }
 
-    const sortBooksData = (books: any[], sortBy: string) => {
+    const sortByPublishedYear = (books: any[]) => {
         return books.sort((a, b) => {
-            const yearA = a.publishedDate?.split('-')[0];
-            const yearB = b.publishedDate?.split('-')[0];
-
-            if (sortBy === 'title') {
-                console.log('ini titles');
-                return a.title?.localeCompare(b.title);
-            } else if (sortBy === 'dates') {
-                console.log('ini dates');
-                return yearA?.localeCompare(yearB);
-            }
-            console.log(yearA, yearB);
+            const yearA = new Date(a.volumeInfo.publishedDate).getFullYear();
+            const yearB = new Date(b.volumeInfo.publishedDate).getFullYear();
+            return yearA - yearB;
         });
-    }
+    };
+
+    const sortByTitle = (books: any[]) => {
+        return books.sort((a, b) => {
+            return a.volumeInfo.title.localeCompare(b.volumeInfo.title);
+        });
+    };
+
 
 
     if (isSortBy) {
         console.log(isSortBy);
-        dataFiltered = sortBooksData(dataFiltered, isSortBy);
+        if (isSortBy === 'title') {
+            dataFiltered = sortByTitle(dataFiltered);
+        }
+        if (isSortBy === 'dates') {
+            dataFiltered = sortByPublishedYear(dataFiltered);
+        }
     }
 
     return (
@@ -107,7 +110,7 @@ const HomePage = () => {
                 </header>
                 <div className="contents">
                     <div className="container mx-auto p-4">
-                        <div className="tops-box flex justify-between items-center">
+                        <div className="tops-box flex flex-col md:flex-row justify-between items-center gap-y-4 md:gap-y-0">
                             <InputSearch callback={search} />
                             <div className="flex flex-row box-filters-pain gap-x-4">
                                 Sort By

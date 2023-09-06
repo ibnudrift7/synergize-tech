@@ -13,10 +13,10 @@ const InputSearch = ({ callback }: any) => {
 	const handleSearch = () => {
 		callback(searchText, selectedDate);
 	};
-	
+
 	return (
 		<>
-			<div className="flex items-center space-x-2 box-search">
+			<div className="flex flex-col md:flex-row items-center space-x-2 box-search">
 				<DatePicker
 					selected={selectedDate}
 					onChange={handleDateChange}
