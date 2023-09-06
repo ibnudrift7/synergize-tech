@@ -24,7 +24,7 @@ const CardBook = ({ item }: any) => {
 				key={item.id}
 				className="bg-white rounded-lg shadow-md overflow-hidden">
 				{/* <Link href={`/books/${item.id}`}> */}
-				<Link href="/[slug]" as={`/books/${item.id}`}>
+				<Link href={`/books/${item.id}`}>
 					<img
 						src={thumbnail}
 						alt={item.volumeInfo.title}

@@ -1,9 +1,9 @@
 "use client"
 
 import React, { useState, useEffect } from "react";
-import Loading from '../../../components/Loading'
-import Error from '../../../components/Error'
-import { fetchBooks } from '../../api/books';
+import Loading from '../../components/Loading'
+import Error from '../../components/Error'
+import { fetchBooks } from '../api/books';
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import CardBook from '@/components/CardBook'
 import InputSearch from "@/components/InputSearch";
