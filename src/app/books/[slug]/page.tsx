@@ -2,30 +2,31 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { detailBook } from '../../api/books';
+import { Book } from '../../../models/book';
+
+interface DetailBooksProps {
+	params: { slug: string };
+}
 
 const DetailBooks = ({ params }: { params: { slug: string } }) => {
-	// const { query } = useRouter();
-	// const slug = query.slug as string;
-	const [book, setBook] = useState([]);
-
+	const [book, setBook] = useState<Book | null>(null);
 	const { slug } = params
 
 	useEffect(() => {
 		if (slug) {
-			detailBook(slug).then((data) => {
-				setBook(data);
-			})
+			detailBook(slug)
+				.then((data) => {
+					setBook(data);
+				})
 				.catch((error) => {
 					console.error('Error fetching data:', error);
 				});
 		}
-	}, []);
+	}, [slug]);
 
 	if (!book) {
 		return <p>Loading...</p>;
 	}
-
-	console.log(book, "book");
 
 	return (
 		<>
