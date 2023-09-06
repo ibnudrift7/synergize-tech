@@ -169,7 +169,7 @@ const HomePage = () => {
 
                         <div className="block-middle-books mt-8">
                             <div className={`${!isGridView ? 'space-y-4' : 'grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6'}`}>
-                                {dataFiltered && dataFiltered.map((item) => (
+                                {dataFiltered && dataFiltered.map((item: any) => (
                                     <div key={item.id}>
                                         <CardBook item={item} />
                                     </div>
