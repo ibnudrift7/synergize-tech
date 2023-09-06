@@ -2,17 +2,16 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 const BookDetail = () => {
-    const router = useRouter();
-    const { slug } = router.query;
+    const { query } = useRouter()
+    const slug = query.slug as string
     const [bookData, setBookData] = useState(null);
 
-    console.log(router, "slugs");
+    console.log(slug, "slugs");
 
     useEffect(() => {
         if (slug) {
             const apiUrl = `https://www.googleapis.com/books/v1/volumes/${slug}`;
             console.log(apiUrl, "apiUrl");
-
             fetch(apiUrl)
                 .then((response) => response.json())
                 .then((data) => {

@@ -20,7 +20,7 @@ const CardBook = ({ item }: any) => {
 			<div data-id={item.id}
 				key={item.id}
 				className="bg-white rounded-lg shadow-md overflow-hidden">
-				<Link href="/[slug]" as={`/${item.id}`}>
+				<Link href={`/detail/${item.id}`}>
 					<img
 						src={thumbnail}
 						alt={item.volumeInfo.title}
