@@ -15,12 +15,16 @@ const CardBook = ({ item }: any) => {
 		thumbnail = 'https://via.placeholder.com/250'
 	}
 
+	console.log(item.id, "item.id");
+
+
 	return (
 		<>
 			<div data-id={item.id}
 				key={item.id}
 				className="bg-white rounded-lg shadow-md overflow-hidden">
-				<Link href={`/detail/${item.id}`}>
+				{/* <Link href={`/books/${item.id}`}> */}
+				<Link href="/[slug]" as={`/books/${item.id}`}>
 					<img
 						src={thumbnail}
 						alt={item.volumeInfo.title}
@@ -36,7 +40,7 @@ const CardBook = ({ item }: any) => {
 						}
 					</small></p>
 				</div>
-			</div>
+			</div >
 		</>
 	)
 }

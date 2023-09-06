@@ -19,3 +19,13 @@ export const fetchBooks = async (def: any, page: any, search: any) => {
         throw new Error("Error fetching books");
     }
 };
+
+export const detailBook = async (id: any) => {
+    try {
+        const response = await axios.get(`${BASE_URL}/${id}?key=${API_KEY}`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        throw new Error("Error fetching book detail");
+    }
+};
